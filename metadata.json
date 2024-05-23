@@ -1,0 +1,11 @@
+{
+    "name": "scStats",
+    "description": "Sea Creature Stats by drawcoco",
+    "version": "2.3.0",
+    "author": "drawcoco",
+    "entry": "index.js",
+    "requires": [
+        "PogData",
+        "Vigilance"
+    ]
+}

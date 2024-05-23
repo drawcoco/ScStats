@@ -1,0 +1,28 @@
+V2.3.0
+
+ScStats is a small ChatTriggers Addon meant for Hypixel Skyblock fishing enjoyers.
+It allow you to store informations on your fishing sessions, and make stats on them to display.
+You'll find out in this addon the possibility to display two graphs showing your catches per thunder and jawbus
+with a few usefull values about them, like average, number caught, and more coming soon! :D
+
+You can join the discord to report bugs and give your ideas: https://discord.gg/8YcmJA7aeM
+
+Usefull commands:
+/stats : shows stats on fishing
+/scs : open the menu
+
+
+First version:
+- GUI display on screen
+  . placable
+  . resizable
+  . color coming soon!
+- Settings menu
+  . graph display
+  . stats display
+  . others coming soon!
+- Stats command
+  . thunder and jawbus catches average
+  . vial average
+  . number of catches
+  . others coming soon!

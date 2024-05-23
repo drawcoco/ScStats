@@ -1,0 +1,47 @@
+
+[graphs]
+
+	[graphs.on_screen_info]
+		show_graphs = true
+		show_info = true
+
+[worm]
+
+	[worm.worm]
+		worm_fishing_party_notifier = true
+		worm_fishing_counter = false
+
+[kuudra]
+
+	[kuudra.kuudra]
+		mana_drain_display = true
+		kuudra_map = true
+		chest_calculator = true
+		deployables_display = true
+
+[kuudra_map]
+
+	[kuudra_map.kuudra_map]
+		kuudra_map = true
+
+[party_ping]
+
+	[party_ping.party_ping]
+		party_ping_thunder = true
+		receive_ping_jawbus = true
+		party_ping_jawbus = true
+		receive_ping_thunder = true
+
+[others]
+
+	[others.boss]
+		boss_screen_notification = false
+		boss_bar = true
+
+	[others.double_hook]
+		double_hook_message = "Woot woot!"
+		double_hook_party_alert = true
+
+	[others.deployable_detection]
+		deployable_detector = false
+
