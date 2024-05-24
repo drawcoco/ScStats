@@ -2,14 +2,14 @@
 [graphs]
 
 	[graphs.on_screen_info]
-		show_graphs = true
-		show_info = true
+		show_graphs = false
+		show_info = false
 
 [worm]
 
 	[worm.worm]
 		worm_fishing_party_notifier = true
-		worm_fishing_counter = false
+		worm_fishing_counter = true
 
 [kuudra]
 

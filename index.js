@@ -4,8 +4,9 @@ import settings from "./settings";
 
 import "./features/doubleHook";
 import "./features/clearStats";
-import "./features/worms";
 
+
+import { getWormCount} from "./features/worms";
 import { GUIIsOpen } from "./features/moveGUI";
 import { getDisplayDeploy } from "./features/FlareFlux";
 import { processJawbusColumns, processThunderColumns, getThunderData, getJawbusData, getThunderMax, getJawbusMax, getNbrColumns
