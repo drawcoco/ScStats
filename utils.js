@@ -30,7 +30,11 @@ export let data = new PogObject("scStats", {
         "xWorm": 10,
         "yWorm": 10,
         "xDeploy": 10,
-        "yDeploy": 10
+        "yDeploy": 10,
+        "xWormStats": 10,
+        "yWormStats": 10,
+        "xPersonalStats": 10,
+        "yPersonalStats": 10
     },
 
     "COUNTER": {

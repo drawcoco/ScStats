@@ -32,9 +32,9 @@ class Settings
         this.addDependency("Receive ping Jawbus", "Party ping Jawbus");
 
         this.addDependency("Worm fishing Party Notifier", "Worm fishing Counter");
+        this.addDependency("Worm fishing Party Stats", "Worm fishing Counter");
 
         this.addDependency("Show graphs","Show Info");
-        this.addDependency("Move graphs", "Show Info");
         //this.addDependency("Thunder stats color","Show Info");
         //this.addDependency("Jawbus stats color","Show Info");
         //this.addDependency("Thunder stats color","Show graphs");
@@ -59,6 +59,26 @@ class Settings
         java.awt.Desktop.getDesktop().browse(new java.net.URI("https://discord.gg/8YcmJA7aeM"));
     }
         
+    @DecimalSliderProperty({
+        name: "Global Text Size",
+        description: "glabal text size for all displays",
+        category: "Informations",
+        subcategory: "Global Variables",
+        minF: 0.1,
+        maxF: 2,
+        decimalPlaces: 2
+    })
+    textSize = 1;
+
+    @ButtonProperty({
+        name: "Move GUI elements",
+        description: "Click the button to move the elements on your screen",
+        category: "Informations",
+        subcategory: "GUI"
+    })
+    openBobberGUI() {
+        ChatLib.command("moveGraph", true);
+    }
 
 //##############################################################################
 //                GRAPHS
@@ -96,16 +116,6 @@ class Settings
     })
     jawbusColor = Color.YELLOW;
 */
-    @ButtonProperty({
-        name: "Move graphs",
-        description: "Click the button to move the Graphs on your screen",
-        category: "Graphs",
-        subcategory: "On screen info"
-    })
-    openBobberGUI() {
-        ChatLib.command("moveGraph", true);
-    }
-
 
     //##############################################################################
     //                Worm
@@ -128,6 +138,22 @@ class Settings
         subcategory: "Worm"
     })
     wormPartyNotifier = false;
+
+    @SwitchProperty({
+        name: "Worm fishing Party Stats",
+        description: "Worm fishing Party Stats",
+        category: "Worm",
+        subcategory: "Worm"
+    })
+    wormStatsDisplay = false;
+
+    @SwitchProperty({
+        name: "Worm fishing Personal Stats",
+        description: "Worm fishing Personal Stats",
+        category: "Worm",
+        subcategory: "Worm"
+    })
+    wormPersonalDisplay = false;
 
 
     //##############################################################################

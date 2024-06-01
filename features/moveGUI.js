@@ -7,6 +7,8 @@ export function GUIIsOpen() {
     return movedisplay.isOpen();
 }
 
+var movePersonalStats = false;
+var movewormStats = false;
 var moveThunder = false;
 var moveJawbus = false;
 var moveWorm = false;
@@ -28,13 +30,31 @@ register("command", () => {
 
 // mouse click event
 register("guimouseclick", (x, y, button, gui, event) => {
-    if (x > data.GRAPH.xDeploy - 5 &&
+    if (x > data.GRAPH.xPersonalStats - 5 &&
+        x < data.GRAPH.xPersonalStats + 110 &&
+        y > data.GRAPH.yPersonalStats - 5 &&
+        y < data.GRAPH.yPersonalStats + 110)
+    {
+        movePersonalStats = true;
+        cx = data.GRAPH.xPersonalStats - x;
+        cy = data.GRAPH.yPersonalStats - y;
+    }
+    if (x > data.GRAPH.xWormStats - 5 &&
+        x < data.GRAPH.xWormStats + 110 &&
+        y > data.GRAPH.yWormStats - 5 &&
+        y < data.GRAPH.yWormStats + 110)
+    {
+        movewormStats = true;
+        cx = data.GRAPH.xWormStats - x;
+        cy = data.GRAPH.yWormStats - y;
+    }
+    else if (x > data.GRAPH.xDeploy - 5 &&
         x < data.GRAPH.xDeploy + 100 &&
         y > data.GRAPH.yDeploy - 5 &&
         y < data.GRAPH.yDeploy + 20)
     {
         moveDeploy = true;
-        cx = data.GRAPH.xDeploy- x;
+        cx = data.GRAPH.xDeploy - x;
         cy = data.GRAPH.yDeploy - y;
     }
     else if (x > data.GRAPH.xWorm - 5 &&
@@ -86,6 +106,18 @@ register("dragged", (dx, dy, x, y) => {
     {
         return;
     }
+    if (movePersonalStats)
+        {
+            data.GRAPH.xPersonalStats = x+cx;
+            data.GRAPH.yPersonalStats = y+cy;
+            data.save();
+        }
+    if (movewormStats)
+    {
+        data.GRAPH.xWormStats = x+cx;
+        data.GRAPH.yWormStats = y+cy;
+        data.save();
+    }
     if (moveDeploy)
     {
         data.GRAPH.xDeploy = x+cx;
@@ -128,6 +160,8 @@ register("dragged", (dx, dy, x, y) => {
 
 // mouse release event
 register("guimouserelease", (x, y, button, gui, event) => {
+    movePersonalStats = false;
+    movewormStats = false;
     moveThunder = false;
     moveJawbus = false;
     moveWorm = false;
