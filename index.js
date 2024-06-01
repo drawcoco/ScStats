@@ -31,16 +31,15 @@ launchTimer = register("tick", () => {
     }
 });
 
-supersecretsong = new Sound({source:"secretsong.ogg"});
-
-register("chat", (anything) => {
+register("chat", (anything, event) => {
     try {
-    supersecretsong.setVolume(0.5);
-    ChatLib.chat("launched song :)");
-    supersecretsong.play();
+        supersecretsong = new Sound({source:"secretsong.ogg"});
+        supersecretsong.setVolume(0.5);
+        supersecretsong.play();
     } catch (e) {
-        ChatLib.chat(e);
+        //ChatLib.chat(e);
     }
+    cancel(event);
 }).setCriteria("${anything} noticemefawe");
 
 
