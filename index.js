@@ -69,32 +69,48 @@ register("renderoverlay", () => {
     yPersonalStats = data.GRAPH.yPersonalStats;
     
     if (settings.wormPersonalDisplay) {
-        batches = getBatches();
-        l = batches.length;
-        avg = Math.round(batches.reduce((a, b) => a+b, 0)/l*10)/10;
-        max = Math.max(...batches);
-        w = 80/l;
-        for (a = 0; a < l; a++) {
-            h = batches[a]/max*45;
-            p = 45-h;
-            new Rectangle(Renderer.DARK_GREEN, xPersonalStats+10+w*a, yPersonalStats+p, w, h).setOutline(Renderer.DARK_GREEN, 0.01).draw();
-        };
-        new Text(`Max : ${max}`, xPersonalStats+15, yPersonalStats+13).setScale(settings.textSize).setColor(Renderer.WHITE).draw();
-        new Text(`Avg / batch : ${avg}`, xPersonalStats+15, yPersonalStats).setScale(settings.textSize).setColor(Renderer.WHITE).draw();
-        new Rectangle(Renderer.BLACK, xPersonalStats+10, yPersonalStats-2, 0, 47).setOutline(Renderer.BLACK, 0.75).draw();
-        new Rectangle(Renderer.BLACK, xPersonalStats+10, yPersonalStats+45, 82, 0).setOutline(Renderer.BLACK, 0.75).draw();
+        try {
+            batches = getBatches();
+            l = batches.length;
+            avg = Math.round(batches.reduce((a, b) => a+b, 0)/l*10)/10;
+            max = Math.max(...batches);
+            w = 80/l;
+            for (a = 0; a < l; a++) {
+                h = batches[a]/max*45;
+                p = 45-h;
+                new Rectangle(Renderer.DARK_GREEN, xPersonalStats+10+w*a, yPersonalStats+p, w, h).setOutline(Renderer.DARK_GREEN, 0.01).draw();
+            };
+            new Text(`Max : ${max}`, xPersonalStats+15, yPersonalStats+13).setScale(settings.textSize).setColor(Renderer.WHITE).draw();
+            new Text(`Avg / batch : ${avg}`, xPersonalStats+15, yPersonalStats).setScale(settings.textSize).setColor(Renderer.WHITE).draw();
+            new Rectangle(Renderer.BLACK, xPersonalStats+10, yPersonalStats-2, 0, 47).setOutline(Renderer.BLACK, 0.75).draw();
+            new Rectangle(Renderer.BLACK, xPersonalStats+10, yPersonalStats+45, 82, 0).setOutline(Renderer.BLACK, 0.75).draw();
+        } catch (e) {
+            data.GRAPH.xPersonalStats = 10;
+            data.GRAPH.yPersonalStats = 10;
+            data.save();
+            xPersonalStats = data.GRAPH.xPersonalStats;
+            yPersonalStats = data.GRAPH.yPersonalStats;
+        }
     }
  
     if (settings.wormStatsDisplay)
     {
-        stats = getWormStats();
-        diff = 0;
-        Object.keys(stats).forEach(player => {
-            new Rectangle(Renderer.BLACK, xWormStats-3, yWormStats+diff-1, 95, 10).setOutline(Renderer.BLACK, 0).draw();
-            new Rectangle(Renderer.GRAY, xWormStats-3, yWormStats+diff-1, (stats[player]/getMaxCount())*95, 10).setOutline(Renderer.GRAY, 0).draw();
-            new Text(player + ": " + stats[player], xWormStats, yWormStats+diff).setScale(settings.textSize).setColor(Renderer.WHITE).draw();
-            diff += 13;
-        });
+        try {
+            stats = getWormStats();
+            diff = 0;
+            Object.keys(stats).forEach(player => {
+                new Rectangle(Renderer.BLACK, xWormStats-3, yWormStats+diff-1, 95, 10).setOutline(Renderer.BLACK, 0).draw();
+                new Rectangle(Renderer.GRAY, xWormStats-3, yWormStats+diff-1, (stats[player]/getMaxCount())*95, 10).setOutline(Renderer.GRAY, 0).draw();
+                new Text(player + ": " + stats[player], xWormStats, yWormStats+diff).setScale(settings.textSize).setColor(Renderer.WHITE).draw();
+                diff += 13;
+            });
+        } catch (e) {
+            data.GRAPH.xWormStats = 10;
+            data.GRAPH.yWormStats = 10;
+            data.save();
+            xWormStats = data.GRAPH.xWormStats;
+            yWormStats = data.GRAPH.yWormStats;
+        }
     }
 
     if (settings.flareFluxDetect)
@@ -103,20 +119,43 @@ register("renderoverlay", () => {
     }
     if (settings.wormCounter)
     {
-        new Text(`Worms around: ${getWormCount()}`, xWorm, yWorm).setScale(settings.textSize).setColor(Renderer.WHITE).draw();
+        try {
+            new Text(`Worms around: ${getWormCount()}`, xWorm, yWorm).setScale(settings.textSize).setColor(Renderer.WHITE).draw();
+        } catch (e) {
+            data.GRAPH.xWorm = 10;
+            data.GRAPH.yWorm = 10;
+            data.save();
+            xWorm = data.GRAPH.xWorm;
+            yWorm = data.GRAPH.yWorm;
+        }
     }
 
     if (settings.showInfos)
     {
-        new Text(`SC since Thunder : ${data.COUNTER.thunder}`, xThunder+sThunder-125, yThunder).setScale(settings.textSize).setColor(Renderer.AQUA).draw();
-        new Text(`Catches : ${data.nbrThunder.length}`, xThunder+sThunder-77, yThunder+10).setScale(settings.textSize).setColor(Renderer.AQUA).draw();
-        new Text(`Avg : ${data.STATS.avgNbrThunder}`, xThunder+sThunder-55, yThunder+20).setScale(settings.textSize).setColor(Renderer.AQUA).draw();
+        try {
+            new Text(`SC since Thunder : ${data.COUNTER.thunder}`, xThunder+sThunder-125, yThunder).setScale(settings.textSize).setColor(Renderer.AQUA).draw();
+            new Text(`Catches : ${data.nbrThunder.length}`, xThunder+sThunder-77, yThunder+10).setScale(settings.textSize).setColor(Renderer.AQUA).draw();
+            new Text(`Avg : ${data.STATS.avgNbrThunder}`, xThunder+sThunder-55, yThunder+20).setScale(settings.textSize).setColor(Renderer.AQUA).draw();
 
-        new Text(`SC since Jawbus : ${data.COUNTER.jawbus}`, xJawbus+sJawbus-119, yJawbus).setScale(settings.textSize).setColor(Renderer.YELLOW).draw();
-        new Text(`Catches : ${data.nbrJawbus.length}`, xJawbus+sJawbus-77, yJawbus+10).setScale(settings.textSize).setColor(Renderer.YELLOW).draw();
-        new Text(`Avg : ${data.STATS.avgNbrJawbus}`, xJawbus+sJawbus-55, yJawbus+20).setScale(settings.textSize).setColor(Renderer.YELLOW).draw();
+            new Text(`SC since Jawbus : ${data.COUNTER.jawbus}`, xJawbus+sJawbus-119, yJawbus).setScale(settings.textSize).setColor(Renderer.YELLOW).draw();
+            new Text(`Catches : ${data.nbrJawbus.length}`, xJawbus+sJawbus-77, yJawbus+10).setScale(settings.textSize).setColor(Renderer.YELLOW).draw();
+            new Text(`Avg : ${data.STATS.avgNbrJawbus}`, xJawbus+sJawbus-55, yJawbus+20).setScale(settings.textSize).setColor(Renderer.YELLOW).draw();
+        } catch (e) {
+            data.GRAPH.xThunder = 10;
+            data.GRAPH.yThunder = 10;
+            data.GRAPH.sThunder = 100;
+            data.GRAPH.xJawbus = 10;
+            data.GRAPH.yJawbus = 10;
+            data.GRAPH.sJawbus = 100;
+            data.save();
+            xThunder = data.GRAPH.xThunder;
+            yThunder = data.GRAPH.yThunder;
+            sThunder = data.GRAPH.sThunder;
+            xJawbus = data.GRAPH.xJawbus;
+            yJawbus = data.GRAPH.yJawbus;
+            sJawbus = data.GRAPH.sJawbus;
+        }
 
-        
         if (settings.showGraphs)
         {
             new Rectangle(Renderer.BLACK, xThunder+10, yThunder+10, 0, 0.9*lThunder-15).setOutline(Renderer.BLACK, 0.75).draw();
@@ -248,6 +287,6 @@ register("renderoverlay", () => {
         })
     }
 } catch (e) {
-    ChatLib.chat(e);
+    //ChatLib.chat(e);
 }
 });
