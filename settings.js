@@ -31,8 +31,8 @@ class Settings
         this.addDependency("Receive ping Thunder", "Party ping Thunder");
         this.addDependency("Receive ping Jawbus", "Party ping Jawbus");
 
-        this.addDependency("Worm fishing Party Notifier", "Worm fishing Counter");
-        this.addDependency("Worm fishing Party Stats", "Worm fishing Counter");
+        //this.addDependency("Worm fishing Party Notifier", "Worm fishing Counter");
+        //this.addDependency("Worm fishing Party Stats", "Worm fishing Counter");
 
         this.addDependency("Show graphs","Show Info");
         //this.addDependency("Thunder stats color","Show Info");
@@ -61,7 +61,7 @@ class Settings
         
     @DecimalSliderProperty({
         name: "Global Text Size",
-        description: "glabal text size for all displays",
+        description: "global text size for all displays",
         category: "Informations",
         subcategory: "Global Variables",
         minF: 0.1,

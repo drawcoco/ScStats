@@ -26,3 +26,6 @@ First version:
   . vial average
   . number of catches
   . others coming soon!
+
+
+official github: https://github.com/drawcoco/ScStats

@@ -9,7 +9,6 @@ var ls = [];
 
 var membraneCount = 0;
 var membraneBatches = [];
-membraneBatches = [12, 17, 13, 8, 9, 11];
 
 var wormStats = {};
 
