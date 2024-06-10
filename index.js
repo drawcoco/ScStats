@@ -4,7 +4,7 @@ import settings from "./settings";
 
 import "./features/doubleHook";
 import "./features/clearStats";
-
+import "./features/trophy";
 
 import { getMaxCount, getWormCount, getWormStats, getBatches } from "./features/worms";
 import { GUIIsOpen } from "./features/moveGUI";

@@ -1,7 +1,7 @@
 {
     "name": "scStats",
     "description": "Sea Creature Stats by drawcoco",
-    "version": "2.3.0",
+    "version": "3.0.0",
     "author": "drawcoco",
     "entry": "index.js",
     "requires": [
