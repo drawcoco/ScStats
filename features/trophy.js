@@ -14,24 +14,32 @@ function getTrophy(playerName) {
         try {
             playerProfile = Object.entries(response.data.profiles).find(profile => profile[1].current == true)[1];
 
-            trophy = {};
             unluckiness = 0;
 
             playerProfile.data.crimson_isle.trophy_fish.fish.forEach(fishType => {
-                trophy[fishType.display_name] = {};
+                colorChar = "";
+                colorChar += fishType.bronze > 0 ? "&8❤" : "&8▫";
+                colorChar += fishType.silver > 0 ? "&7❤" : "&7▫";
+                colorChar += fishType.gold > 0 ? "&6❤" : "&6▫";
+                colorChar += fishType.diamond > 0 ? "&b❤" : "&b▫";
                 if (fishType.diamond > 0 || fishType.gold > 0) {
-                    trophy[fishType.display_name].noluck = parseInt((1 - Math.pow(0.9978, parseInt( fishType.diamond > 0 ? fishType.total/fishType.diamond : fishType.total/fishType.gold*10)))*100)/100;
+                    noluck = parseInt(
+                        (1 - Math.pow(0.9978, parseInt( fishType.diamond > 0 ? fishType.total/fishType.diamond : fishType.total/fishType.gold*10)))*100
+                    )/100;
 
-                    ChatLib.chat(fishType.display_name.padEnd(21) + " =>   unluckyness: " + trophy[fishType.display_name].noluck);
-                    unluckiness += trophy[fishType.display_name].noluck * getDifficulty(fishType.display_name);
+                    filler = " ".repeat(parseInt(Math.pow(23-fishType.display_name.length, 1.11)));
+                    luckColor = noluck < 0.25 ? "&b" : noluck < 0.5 ? "&a" : noluck < 0.75 ? "&e" : "&4";
+
+                    ChatLib.chat(colorChar + "&f " + fishType.display_name + filler + " =>   unluckyness: " + luckColor + noluck);
+                    unluckiness += noluck * getDifficulty(fishType.display_name);
                 } else {
-                    ChatLib.chat(fishType.display_name.padEnd(21) + " =>   unluckyness: 0");
+                    ChatLib.chat(colorChar + "&f " + fishType.display_name + filler + " =>   unluckyness: 0");
                 }
             });
             
-            // ♚♚♚♚♚♚♚♚♚♚♚♚♚♚♚
+            unluckynessColor = unluckiness < 400 ? "&b" : unluckiness < 500 ? "&a" : unluckiness < 600 ? "&e" : "&4";
 
-            ChatLib.chat("Total unluckiness: " + unluckiness);
+            ChatLib.chat("Total unluckiness: " + unluckynessColor + parseInt(unluckiness) + "/1000");
 
         } catch (e) {
             ChatLib.chat(e);
