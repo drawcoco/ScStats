@@ -9,6 +9,7 @@ register("command", (playerName) => {
 function getTrophy(playerName) {
 
     ChatLib.chat("Requesting trophy fish for player " + playerName);
+    ChatLib.chat("...  ...  ...");
 
     request({url: `https://sky.shiiyu.moe/api/v2/profile/${playerName}`, json: true}).then(response => {
         try {
@@ -28,7 +29,7 @@ function getTrophy(playerName) {
                     )/100;
 
                     filler = " ".repeat(parseInt(Math.pow(23-fishType.display_name.length, 1.11)));
-                    luckColor = noluck < 0.25 ? "&b" : noluck < 0.5 ? "&a" : noluck < 0.75 ? "&e" : "&4";
+                    luckColor = getUnluckinessColor(noluck);
 
                     ChatLib.chat(colorChar + "&f " + fishType.display_name + filler + " =>   unluckyness: " + luckColor + noluck);
                     unluckiness += noluck * getDifficulty(fishType.display_name);
@@ -37,9 +38,9 @@ function getTrophy(playerName) {
                 }
             });
             
-            unluckynessColor = unluckiness < 400 ? "&b" : unluckiness < 500 ? "&a" : unluckiness < 600 ? "&e" : "&4";
+            unluckynessColor = getGlobalUnluckinessColor(unluckiness);
 
-            ChatLib.chat("Total unluckiness: " + unluckynessColor + parseInt(unluckiness) + "/1000");
+            ChatLib.chat("Total unluckiness: " + unluckynessColor + parseInt(unluckiness) + "/1000 &r(" + getGlobalUnluckinessWording(unluckiness) + ")");
 
         } catch (e) {
             ChatLib.chat(e);
@@ -68,6 +69,18 @@ difficulty = {
     "Vanille": 106.93,
     "Volcanic Stonefish": 63.7,
 };
+
+function getUnluckinessColor(noluck) {
+    return noluck < 0.25 ? "&b" : noluck < 0.5 ? "&a" : noluck < 0.75 ? "&e" : "&4";
+}
+
+function getGlobalUnluckinessColor(unluckiness) {
+    return unluckiness < 400 ? "&b" : unluckiness < 500 ? "&a" : unluckiness < 600 ? "&e" : "&4";
+}
+
+function getGlobalUnluckinessWording(unluckiness) {
+    return unluckiness < 400 ? "Wow so lucky!" : unluckiness < 500 ? "Okey you are lucky" : unluckiness < 600 ? "quite unlucky but I've seen worse" : "oof you are really unlucky";
+}
 
 function getDifficulty(fishType) {
     return difficulty[fishType];

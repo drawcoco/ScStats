@@ -4,7 +4,7 @@ import settings from "./settings";
 
 import "./features/doubleHook";
 import "./features/clearStats";
-import "./features/trophy";
+
 
 import { getMaxCount, getWormCount, getWormStats, getBatches } from "./features/worms";
 import { GUIIsOpen } from "./features/moveGUI";
@@ -12,6 +12,7 @@ import { getDisplayDeploy } from "./features/FlareFlux";
 import { processJawbusColumns, processThunderColumns, getThunderData, getJawbusData, getThunderMax, getJawbusMax, getNbrColumns
     } from "./features/processFunctions";
 
+import "./features/trophy";
 import "./features/mobEvents";
 
 // option settings GUI
